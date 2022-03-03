@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .top_rect{
+            position: relative;
+            margin: auto;
+            width: 100px;
+            height: 150px;
+            border-radius: 10px;
+            box-shadow: 1px 1px 10px rgb(152, 152, 152);
+            background: #654ea3;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #eaafc8, #654ea3);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #eaafc8, #654ea3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+        }
+        .rect{
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: 400px;
+            background: #FFAFBD;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to left, #ffc3a0, #FFAFBD);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to left, #ffc3a0, #FFAFBD); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            border-radius: 50%;
+            margin: 50px auto;
+            overflow: hidden;
+            box-shadow: 1px 1px 10px rgb(152, 152, 152);
+        }
+        .ball{
+            position: absolute;
+            background: #D3CCE3;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #E9E4F0, #D3CCE3);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #E9E4F0, #D3CCE3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            /* opacity: 3; */
+            border-radius: 50%;
+            box-shadow: 1px 1px 10px rgb(152, 152, 152);
+            opacity: 80%;
+        }
+        
+        </style>
+</head>
+<body>
+    <div class="top_rect">
+        <div class="rect">
+        </div>
+    </div>
+    
+
+    <script>
+        const rect = document.querySelector('.rect');
+        let ball;
+        const balls=[];
+
+        for (i=0;i<=150;i++){
+            ball = document.createElement('div');
+            ball.className='ball';
+            ball.style.left=Math.floor(Math.random()*400)+'px';
+            ball.style.top=Math.floor(Math.random()*400)+'px';
+            ball.style.width=ball.style.height=3+Math.floor(Math.random()*20)+'px';
+            ball.style.opacity=Math.floor(Math.random()*80)+'%';
+
+            rect.append(ball);
+            balls.push(ball);
+        } 
+
+        function runBalls(){
+            balls.forEach(function(ball){
+                ball.style.top=parseInt(ball.style.top)  + Math.floor(Math.random()*5)+'px';
+                ball.style.left=parseInt(ball.style.left)  + (Math.floor(Math.random()*5)-2)+'px';
+
+            if(parseInt(ball.style.top)> 500){
+                ball.style.top='0px';
+            }
+            if(parseInt(ball.style.left)> 400){
+                ball.style.left='0px';
+            }
+            });
+            setTimeout(runBalls,100);
+        }
+        runBalls();
+    </script>
+</body>
+</html>
